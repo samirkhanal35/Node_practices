@@ -1,5 +1,6 @@
 const path = require("path");
 const http = require("http");
+const https = require("https");
 const express = require("express");
 const socketio = require("socket.io");
 
@@ -23,6 +24,11 @@ io.on("connection", (socket) => {
   });
 
   //   io.emit()
+
+  //   Listen for chatMessage
+  socket.on("chatMessage", (msg) => {
+    io.emit("message", msg);
+  });
 });
 
 const PORT = 3000 || process.env.PORT;
